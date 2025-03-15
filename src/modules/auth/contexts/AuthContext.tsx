@@ -26,6 +26,7 @@ type AuthContextData = {
   reload: () => void;
   reloadUser: () => void;
   setUserData: (userData: User) => void;
+  signOut: () => void;
 };
 
 const emptyContextValue: AuthContextData = {
@@ -33,6 +34,7 @@ const emptyContextValue: AuthContextData = {
   reload: noOperation,
   reloadUser: noOperation,
   setUserData: noOperation,
+  signOut: noOperation,
 };
 
 export const AuthContext = createContext<AuthContextData>(emptyContextValue);
@@ -44,15 +46,14 @@ export default function AuthContextProvider({
 }) {
   const [state, setState] = useState<AuthContextState>({ type: "loading" });
 
-  console.log("!!!HERE");
-
   useEffect(() => {
     if (state.type === "error") {
       return;
     }
 
+    console.log("SUBSCRIBED!");
     const subscription = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
+      console.log(event);
       switch (event) {
         case "SIGNED_OUT": {
           setState({ type: "signedOut" });
@@ -73,6 +74,7 @@ export default function AuthContextProvider({
 
         case "INITIAL_SESSION":
         case "SIGNED_IN": {
+          console.log(session);
           if (!session) {
             if (state.type !== "signedOut") {
               setState({ type: "signedOut" });
@@ -138,6 +140,10 @@ export default function AuthContextProvider({
     [state],
   );
 
+  const signOut = useCallback(() => {
+    supabase.auth.signOut();
+  }, []);
+
   const reloadUser = useCallback(() => {
     switch (state.type) {
       case "loading":
@@ -177,6 +183,7 @@ export default function AuthContextProvider({
             reload,
             reloadUser,
             setUserData,
+            signOut,
           }}
         >
           {children}

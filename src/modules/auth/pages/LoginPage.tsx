@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
@@ -9,30 +9,30 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/config/supabase";
 import { AuthLayout } from "@/modules/auth/components/AuthLayout";
 import { AuthContext } from "@/modules/auth/contexts/AuthContext";
-import { Button } from "@/ui/button";
 import { Label } from "@/ui/label";
 import { notReachable } from "@/utils/notReachable";
 
+// TODO: update the auth form. This one is deprecated and doesn't trigger auth.subscription events
+
 export const LoginPage = () => {
-  const { state, reload } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const router = useRouter();
-  const redirectBack = router.query.redirectBack as string;
+  const searchParams = useSearchParams();
+  const redirectBack = searchParams.get("redirectBack");
 
   switch (state.type) {
     case "loading":
       return <AuthLayout>Loading...</AuthLayout>;
 
     case "error":
-      return (
-        <AuthLayout>
-          Auth error: {state.error}
-          <Button onClick={reload}>Retry</Button>
-        </AuthLayout>
-      );
-
     case "signedOut":
       return (
         <AuthLayout>
+          {state.type === "error" && (
+            <Label className={"color w-full text-red-500"}>
+              Error: {state.error}
+            </Label>
+          )}
           <Auth
             supabaseClient={supabase}
             appearance={{
@@ -53,6 +53,7 @@ export const LoginPage = () => {
               },
             }}
             providers={[]}
+            redirectTo={"/"}
           />
         </AuthLayout>
       );
