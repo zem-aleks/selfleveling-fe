@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import AuthContextProvider from "@/modules/auth/contexts/AuthContext";
 import { AuthGuard } from "@/modules/auth/guards/AuthGuard";
+import { Toaster } from "@/ui/sonner";
 
 import "../globals.css";
 
@@ -31,8 +32,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Toaster />
         <AuthContextProvider>
-          <AuthGuard>{children}</AuthGuard>
+          <AuthGuard>
+            <div className="flex h-full w-full flex-col items-center justify-center">
+              <div className="flex h-screen w-full max-w-2xl flex-col justify-center gap-4 pb-20">
+                {children}
+              </div>
+            </div>
+          </AuthGuard>
         </AuthContextProvider>
       </body>
     </html>

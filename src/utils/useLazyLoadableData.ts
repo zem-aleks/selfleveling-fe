@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { AxiosError, AxiosRequestConfig } from "axios";
 
-import { cancelable } from "@/api/cancelable";
+import { cancelable } from "@/utils/cancelable";
 import { LoadableData } from "@/utils/useLoadableData";
 
 import { notReachable } from "./notReachable";

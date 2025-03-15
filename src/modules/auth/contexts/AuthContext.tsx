@@ -51,9 +51,7 @@ export default function AuthContextProvider({
       return;
     }
 
-    console.log("SUBSCRIBED!");
     const subscription = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event);
       switch (event) {
         case "SIGNED_OUT": {
           setState({ type: "signedOut" });
@@ -89,7 +87,7 @@ export default function AuthContextProvider({
           setApiAuth(session.access_token);
           // TODO: check response properly
           api
-            .get("/users/me")
+            .get("/auth/me")
             .then((res) => {
               setState({
                 type: "signedIn",
@@ -153,7 +151,7 @@ export default function AuthContextProvider({
 
       case "signedIn":
         api
-          .get("/users/me")
+          .get("/auth/me")
           .then((res) => {
             setUserData(res as unknown as User);
           })

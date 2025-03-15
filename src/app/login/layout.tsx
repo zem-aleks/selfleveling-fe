@@ -5,6 +5,8 @@ export const metadata = {
   description: "",
 };
 
+import { Toaster } from "@/ui/sonner";
+
 import "../globals.css";
 
 export default function RootLayout({
@@ -15,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Toaster />
         <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>

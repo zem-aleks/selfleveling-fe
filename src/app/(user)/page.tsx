@@ -1,5 +1,5 @@
-import { HeroPage } from "@/modules/hero/pages/HeroPage";
+import { HeroesPage } from "@/modules/hero/pages/HeroesPage";
 
 export default function Home() {
-  return <HeroPage />;
+  return <HeroesPage />;
 }
