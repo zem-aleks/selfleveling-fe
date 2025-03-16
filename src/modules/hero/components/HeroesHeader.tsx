@@ -5,6 +5,7 @@ import {
   Msg as CreateHeroFormMsg,
 } from "@/modules/hero/components/CreateHeroForm";
 import { Button } from "@/ui/button";
+import { H1 } from "@/ui/custom/H1";
 import {
   Dialog,
   DialogContent,
@@ -24,7 +25,7 @@ export const HeroesHeader = ({ onMsg }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={"flex flex-row items-center justify-between"}>
-      <h1 className="text-xl font-bold">Heroes</h1>
+      <H1>Heroes</H1>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" onClick={() => setOpen(true)}>

@@ -10,6 +10,8 @@ import {
 import { Avatar, AvatarFallback } from "@/ui/avatar";
 import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
+import { H1 } from "@/ui/custom/H1";
+import { Label } from "@/ui/label";
 import { notReachable } from "@/utils/notReachable";
 import { useReloadableData } from "@/utils/useReloadableData";
 
@@ -50,7 +52,7 @@ export const HeroesPage = () => {
                       <AvatarFallback>{hero.name.at(0)}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <h1 className="text-lg font-semibold">{hero.name}</h1>
+                      <H1>{hero.name}</H1>
                       <p className="text-sm text-gray-500">{hero.language}</p>
                     </div>
                   </div>
@@ -65,8 +67,8 @@ export const HeroesPage = () => {
       return (
         <>
           <HeroesHeader onMsg={onHeaderMsg} />
-          <div className={"flex"}>
-            Something went wrong
+          <div className={"flex flex-col items-center gap-4"}>
+            <Label>Something went wrong</Label>
             <Button onClick={reload}>Try again</Button>
           </div>
         </>

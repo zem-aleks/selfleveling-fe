@@ -3,11 +3,11 @@ import { AxiosRequestConfig } from "axios";
 import { api } from "@/modules/auth/api/api";
 import { HeroEntity } from "@/modules/hero/types";
 
-export const getHeroes = async (
-  params: void,
+export const getHero = async (
+  heroId: string,
   config?: AxiosRequestConfig,
-): Promise<HeroEntity[]> => {
-  return api.get(`/heroes`, {
+): Promise<HeroEntity> => {
+  return api.get(`/heroes/${heroId}`, {
     signal: config?.signal,
   });
 };
