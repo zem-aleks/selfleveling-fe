@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from "axios";
 import { z } from "zod";
 
 import { api } from "@/modules/auth/api/api";
-import { GoalEntity } from "@/modules/goal/types";
+import { GoalEntity } from "@/modules/goal/types/goal";
 
 export const CreateGoalFormSchema = z.object({
   goal: z.string().min(1, "Please enter your goal."),

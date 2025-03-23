@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 
 import { api } from "@/modules/auth/api/api";
-import { GoalEntity } from "@/modules/goal/types";
+import { GoalEntity } from "@/modules/goal/types/goal";
 import { HeroEntity } from "@/modules/hero/types";
 
 export type GoalData = {

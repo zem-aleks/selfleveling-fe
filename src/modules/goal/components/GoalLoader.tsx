@@ -4,22 +4,23 @@ import { getGoal, GoalData } from "@/modules/goal/api/getGoal";
 import { Button } from "@/ui/button";
 import { Label } from "@/ui/label";
 import { notReachable } from "@/utils/notReachable";
-import { useLoadableData } from "@/utils/useLoadableData";
+import { useReloadableData } from "@/utils/useReloadableData";
 
 type Props = {
   goalId: string;
-  children: (data: GoalData) => ReactNode;
+  children: (data: GoalData, reload: () => void) => ReactNode;
 };
 
 export const GoalLoader = ({ goalId, children }: Props): ReactNode => {
-  const { state, reload } = useLoadableData(getGoal, goalId);
+  const { state, reload } = useReloadableData(getGoal, goalId);
 
   switch (state.type) {
     case "loading":
       return <>Loading...</>;
 
+    case "reloading":
     case "loaded":
-      return <>{children(state.data)}</>;
+      return <>{children(state.data, reload)}</>;
 
     case "error":
       return (

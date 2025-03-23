@@ -105,7 +105,9 @@ export const CreateGoalPage = ({ heroId }: Props) => {
                   )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" loading={state.type === "loading"}>
+                  Submit
+                </Button>
               </form>
             </Form>
           </div>
