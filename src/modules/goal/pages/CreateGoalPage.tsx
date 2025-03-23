@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -11,7 +12,6 @@ import {
   CreateGoalData,
   CreateGoalFormSchema,
 } from "@/modules/goal/api/createGoal";
-import { createHero } from "@/modules/hero/api/createHero";
 import { HeroLoader } from "@/modules/hero/components/HeroLoader";
 import { Button } from "@/ui/button";
 import { H1 } from "@/ui/custom/H1";
@@ -25,7 +25,7 @@ import {
   FormMessage,
 } from "@/ui/form";
 import { Textarea } from "@/ui/textarea";
-import { noOperation, notReachable } from "@/utils/notReachable";
+import { notReachable } from "@/utils/notReachable";
 import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
 
 type Props = {
@@ -33,6 +33,7 @@ type Props = {
 };
 
 export const CreateGoalPage = ({ heroId }: Props) => {
+  const router = useRouter();
   const form = useForm<CreateGoalData>({
     resolver: zodResolver(CreateGoalFormSchema),
     defaultValues: {
@@ -54,6 +55,7 @@ export const CreateGoalPage = ({ heroId }: Props) => {
 
       case "loaded":
         toast.success("Goal was created successfully");
+        router.push(`/goals/${state.data.goal.id}`);
         // onMsg({ type: "onHeroCreated", hero: state.data });
         reset();
         break;

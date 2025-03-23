@@ -72,7 +72,6 @@ export default function AuthContextProvider({
 
         case "INITIAL_SESSION":
         case "SIGNED_IN": {
-          console.log(session);
           if (!session) {
             if (state.type !== "signedOut") {
               setState({ type: "signedOut" });
