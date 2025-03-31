@@ -36,7 +36,7 @@ export default function RootLayout({
         <AuthContextProvider>
           <AuthGuard>
             <div className="flex h-full w-full flex-col items-center justify-center">
-              <div className="flex h-screen w-full max-w-2xl flex-col justify-center gap-4 pb-20">
+              <div className="flex min-h-screen w-full max-w-2xl flex-col justify-center gap-4 pb-20">
                 {children}
               </div>
             </div>

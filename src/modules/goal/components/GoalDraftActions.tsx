@@ -4,16 +4,9 @@ import {
   FollowUpQuestionForm,
   Msg as FollowUpQuestionFormMsg,
 } from "@/modules/goal/components/FollowUpQuestionForm";
-import { KpiBuilder } from "@/modules/goal/components/KpiBuilder";
 import { GoalEntity } from "@/modules/goal/types/goal";
-import { Button } from "@/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/ui/card";
+import { KpiBuilder } from "@/modules/kpi/components/KpiBuilder";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { noOperation, notReachable } from "@/utils/notReachable";
 
 type Msg = FollowUpQuestionFormMsg;

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { getKpis } from "@/modules/kpi/api/getKpis";
-import { KpiEntity } from "@/modules/kpi/types";
+import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
 import { Button } from "@/ui/button";
 import { Label } from "@/ui/label";
 import { notReachable } from "@/utils/notReachable";
@@ -9,7 +9,10 @@ import { useReloadableData } from "@/utils/useReloadableData";
 
 type Props = {
   goalId: string;
-  children: (kpis: KpiEntity[], reload: () => void) => ReactNode;
+  children: (
+    kpis: KpiWithMeasurementsEntity[],
+    reload: () => void,
+  ) => ReactNode;
 };
 
 export const DraftKpisLoader = ({ goalId, children }: Props): ReactNode => {

@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from "axios";
 
 import { api } from "@/modules/auth/api/api";
-import { KpiEntity } from "@/modules/kpi/types";
+import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
 
 export const getKpis = async (
   goalId: string,
   config?: AxiosRequestConfig,
-): Promise<KpiEntity[]> => {
+): Promise<KpiWithMeasurementsEntity[]> => {
   return api.get(`/kpis?goalId=${goalId}`, {
     signal: config?.signal,
   });
