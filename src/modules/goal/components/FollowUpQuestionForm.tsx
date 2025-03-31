@@ -43,7 +43,7 @@ export const FollowUpQuestionForm = ({ goalId, onMsg }: Props) => {
     },
   });
 
-  const { state, load } = useLazyLoadableData(addGoalDetails);
+  const { state, load, reset } = useLazyLoadableData(addGoalDetails);
 
   useEffect(() => {
     switch (state.type) {
@@ -58,6 +58,7 @@ export const FollowUpQuestionForm = ({ goalId, onMsg }: Props) => {
       case "loaded":
         toast.success("Goal details were processed successfully");
         onMsg({ type: "onGoalUpdated", goal: state.data.goal });
+        reset();
         break;
 
       default:

@@ -4,6 +4,7 @@ import {
   FollowUpQuestionForm,
   Msg as FollowUpQuestionFormMsg,
 } from "@/modules/goal/components/FollowUpQuestionForm";
+import { KpiBuilder } from "@/modules/goal/components/KpiBuilder";
 import { GoalEntity } from "@/modules/goal/types/goal";
 import { Button } from "@/ui/button";
 import {
@@ -13,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card";
-import { notReachable } from "@/utils/notReachable";
+import { noOperation, notReachable } from "@/utils/notReachable";
 
 type Msg = FollowUpQuestionFormMsg;
 
@@ -38,19 +39,7 @@ export const GoalDraftActions = ({ goal, onMsg }: Props): ReactNode => {
       );
 
     case "formed":
-      return (
-        <Card>
-          <CardHeader>
-            <CardTitle>{`Great job! Fantastic goal :)`}</CardTitle>
-            <CardDescription>
-              Now we can go and build a roadmap. Are you ready?
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button type="submit">Start</Button>
-          </CardContent>
-        </Card>
-      );
+      return <KpiBuilder goal={goal} onMsg={noOperation} />;
 
     default:
       return notReachable(goal);
