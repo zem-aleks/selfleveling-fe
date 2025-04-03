@@ -7,7 +7,7 @@ import {
 import { GoalEntity } from "@/modules/goal/types/goal";
 import { KpiBuilder } from "@/modules/kpi/components/KpiBuilder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
-import { noOperation, notReachable } from "@/utils/notReachable";
+import { notReachable } from "@/utils/notReachable";
 
 type Msg = FollowUpQuestionFormMsg;
 
@@ -32,7 +32,7 @@ export const GoalDraftActions = ({ goal, onMsg }: Props): ReactNode => {
       );
 
     case "formed":
-      return <KpiBuilder goal={goal} onMsg={noOperation} />;
+      return <KpiBuilder goal={goal} />;
 
     default:
       return notReachable(goal);
