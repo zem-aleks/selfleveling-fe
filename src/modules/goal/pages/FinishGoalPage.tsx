@@ -1,13 +1,15 @@
 "use client";
 
 import { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 
+import { AcceptGoalForm } from "@/modules/goal/components/AcceptGoalForm";
+import { DeleteGoalForm } from "@/modules/goal/components/DeleteGoalForm";
 import { GoalLoader } from "@/modules/goal/components/GoalLoader";
 import { GoalEntity, GoalFormed } from "@/modules/goal/types/goal";
 import { GoalKpisLoader } from "@/modules/kpi/components/GoalKpisLoader";
 import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
 import { SkillsLoader } from "@/modules/skills/components/SkillsLoader";
-import { Button } from "@/ui/button";
 import { H1 } from "@/ui/custom/H1";
 import { notReachable } from "@/utils/notReachable";
 
@@ -16,6 +18,7 @@ type Props = {
 };
 
 export const FinishGoalPage = ({ goalId }: Props) => {
+  const router = useRouter();
   return (
     <GoalLoader goalId={goalId}>
       {({ hero, goal }) => (
@@ -79,8 +82,14 @@ export const FinishGoalPage = ({ goalId }: Props) => {
                     <hr />
 
                     <div className={"flex flex-row justify-between gap-4"}>
-                      <Button className={"grow bg-red-500"}>Decline</Button>
-                      <Button className={"grow bg-green-500"}>Accept</Button>
+                      <DeleteGoalForm
+                        goal={goal}
+                        onMsg={() => router.replace(`/heroes/${hero.id}`)}
+                      />
+                      <AcceptGoalForm
+                        goal={goal}
+                        onMsg={() => router.replace(`/heroes/${hero.id}`)}
+                      />
                     </div>
                   </div>
                 )}
