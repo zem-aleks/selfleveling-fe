@@ -9,7 +9,7 @@ import { GoalLoader } from "@/modules/goal/components/GoalLoader";
 import { GoalEntity, GoalFormed } from "@/modules/goal/types/goal";
 import { GoalKpisLoader } from "@/modules/kpi/components/GoalKpisLoader";
 import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
-import { SkillsLoader } from "@/modules/skills/components/SkillsLoader";
+import { GoalSkillsLoader } from "@/modules/skills/components/GoalSkillsLoader";
 import { H1 } from "@/ui/custom/H1";
 import { notReachable } from "@/utils/notReachable";
 
@@ -60,7 +60,7 @@ export const FinishGoalPage = ({ goalId }: Props) => {
 
                     <hr />
 
-                    <SkillsLoader goalId={goalId}>
+                    <GoalSkillsLoader goalId={goalId}>
                       {(skills) => (
                         <div className="flex flex-col gap-4">
                           <p>{`List of skills that are needed to achieve this goal`}</p>
@@ -77,7 +77,7 @@ export const FinishGoalPage = ({ goalId }: Props) => {
                           </ul>
                         </div>
                       )}
-                    </SkillsLoader>
+                    </GoalSkillsLoader>
 
                     <hr />
 

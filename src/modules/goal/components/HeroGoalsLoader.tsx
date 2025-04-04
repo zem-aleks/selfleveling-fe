@@ -1,32 +1,32 @@
 import { ReactNode } from "react";
 
-import { getGoalSkills } from "@/modules/skills/api/getGoalSkills";
-import { SkillEntity } from "@/modules/skills/types/entity";
+import { getHeroGoals } from "@/modules/goal/api/getHeroGoals";
+import { GoalEnhancedEntity } from "@/modules/goal/types/goal";
 import { Button } from "@/ui/button";
 import { Label } from "@/ui/label";
 import { notReachable } from "@/utils/notReachable";
 import { useReloadableData } from "@/utils/useReloadableData";
 
 type Props = {
-  goalId: string;
-  children: (kpis: SkillEntity[]) => ReactNode;
+  heroId: string;
+  children: (goals: GoalEnhancedEntity[], reload: () => void) => ReactNode;
 };
 
-export const SkillsLoader = ({ goalId, children }: Props): ReactNode => {
-  const { state, reload } = useReloadableData(getGoalSkills, goalId);
+export const HeroGoalsLoader = ({ heroId, children }: Props): ReactNode => {
+  const { state, reload } = useReloadableData(getHeroGoals, heroId);
 
   switch (state.type) {
     case "loading":
-      return <div>{`Checking what skills are needed to make it...`}</div>;
+      return <>Loading...</>;
 
     case "reloading":
     case "loaded":
-      return <>{children(state.data)}</>;
+      return <>{children(state.data, reload)}</>;
 
     case "error":
       return (
         <div className={"flex flex-col items-center gap-4"}>
-          <Label>Something went wrong. Skills are not defined :(</Label>
+          <Label>Something went wrong</Label>
           <Button onClick={reload}>Try again</Button>
         </div>
       );

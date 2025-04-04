@@ -1,3 +1,5 @@
+import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
+
 type GoalCommonFields = {
   id: string;
   userId: string;
@@ -18,4 +20,12 @@ export type GoalFormed = GoalCommonFields & {
   status: "formed";
 };
 
-export type GoalEntity = GoalDraft | GoalFormed;
+export type GoalActive = Omit<GoalFormed, "status"> & {
+  status: "active";
+};
+
+export type GoalEntity = GoalDraft | GoalFormed | GoalActive;
+
+export type GoalEnhancedEntity = GoalActive & {
+  kpis: KpiWithMeasurementsEntity[];
+};
