@@ -34,10 +34,10 @@ export const DraftGoalsList = ({
               >
                 <div>{goal.status === "draft" ? goal.goal : goal.title}</div>
                 <div className={"flex flex-row items-center gap-2"}>
+                  <DeleteGoalForm goal={goal} onMsg={onMsg} />
                   <Link href={"/goals/" + goal.id}>
                     <Button>Edit</Button>
                   </Link>
-                  <DeleteGoalForm goal={goal} onMsg={onMsg} />
                 </div>
               </CardTitle>
             </CardHeader>
