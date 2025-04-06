@@ -35,16 +35,16 @@ import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
 
 const languages = [
   { label: "English", value: "en" },
-  { label: "Ukrainian", value: "ua" },
+  // { label: "Ukrainian", value: "ua" },
   { label: "Polish", value: "pl" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
+  // { label: "French", value: "fr" },
+  // { label: "German", value: "de" },
+  // { label: "Spanish", value: "es" },
+  // { label: "Portuguese", value: "pt" },
+  // { label: "Russian", value: "ru" },
+  // { label: "Japanese", value: "ja" },
+  // { label: "Korean", value: "ko" },
+  // { label: "Chinese", value: "zh" },
 ] as const;
 
 export type Msg = { type: "onHeroCreated"; hero: HeroEntity };

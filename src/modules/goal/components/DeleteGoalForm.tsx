@@ -3,15 +3,15 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 import { deleteGoal } from "@/modules/goal/api/deleteGoal";
-import { GoalFormed } from "@/modules/goal/types/goal";
+import { GoalEntity } from "@/modules/goal/types/goal";
 import { Button } from "@/ui/button";
 import { notReachable } from "@/utils/notReachable";
 import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
 
-type Msg = { type: "onGoalDeleted" };
+export type Msg = { type: "onGoalDeleted" };
 
 type Props = {
-  goal: GoalFormed;
+  goal: GoalEntity;
   onMsg: (msg: Msg) => void;
 };
 
@@ -46,7 +46,7 @@ export const DeleteGoalForm = ({ goal, onMsg }: Props) => {
           className={"grow bg-red-500"}
           onClick={() => load({ goalId: goal.id })}
         >
-          Delete goal
+          Delete
         </Button>
       );
 
@@ -54,7 +54,7 @@ export const DeleteGoalForm = ({ goal, onMsg }: Props) => {
     case "loading":
       return (
         <Button className={"grow bg-red-500"} loading={true}>
-          Delete goal
+          Delete
         </Button>
       );
 

@@ -45,19 +45,23 @@ export const HeroesPage = () => {
           <HeroesHeader onMsg={onHeaderMsg} />
           <div className="flex flex-col gap-2">
             {state.data.map((hero) => (
-              <Link href={`/heroes/${hero.id}`} key={hero.id}>
-                <Card className="cursor-pointer p-2">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="size-12">
-                      <AvatarFallback>{hero.name.at(0)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <H1>{hero.name}</H1>
-                      <p className="text-sm text-gray-500">{hero.language}</p>
-                    </div>
+              <Card key={hero.id} className="p-2 px-4">
+                <div className="flex items-center gap-4">
+                  <Avatar className="size-12">
+                    <AvatarFallback>{hero.name.at(0)}</AvatarFallback>
+                  </Avatar>
+                  <div className="grow">
+                    <H1>{hero.name}</H1>
+                    <p className="text-sm text-gray-500">{hero.language}</p>
                   </div>
-                </Card>
-              </Link>
+                  <div className={"flex items-center gap-2"}>
+                    <Button className={"bg-red-500"}>Delete</Button>
+                    <Link href={`/heroes/${hero.id}`}>
+                      <Button>Select</Button>
+                    </Link>
+                  </div>
+                </div>
+              </Card>
             ))}
           </div>
         </>
