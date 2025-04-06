@@ -126,6 +126,9 @@ const FinishGoalChecker = ({
 
       return children(goal);
 
+    case "active":
+      throw new Error("Goal is already finished!");
+
     default:
       return notReachable(goal);
   }

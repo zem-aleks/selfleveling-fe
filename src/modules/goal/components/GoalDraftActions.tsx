@@ -4,7 +4,7 @@ import {
   FollowUpQuestionForm,
   Msg as FollowUpQuestionFormMsg,
 } from "@/modules/goal/components/FollowUpQuestionForm";
-import { GoalEntity } from "@/modules/goal/types/goal";
+import { GoalDraft, GoalFormed } from "@/modules/goal/types/goal";
 import { KpiBuilder } from "@/modules/kpi/components/KpiBuilder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { notReachable } from "@/utils/notReachable";
@@ -12,7 +12,7 @@ import { notReachable } from "@/utils/notReachable";
 type Msg = FollowUpQuestionFormMsg;
 
 type Props = {
-  goal: GoalEntity;
+  goal: GoalDraft | GoalFormed;
   onMsg: (msg: Msg) => void;
 };
 

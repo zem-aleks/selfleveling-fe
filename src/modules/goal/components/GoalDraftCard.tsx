@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { GoalEntity } from "@/modules/goal/types/goal";
+import { GoalDraft, GoalFormed } from "@/modules/goal/types/goal";
 import {
   Card,
   CardContent,
@@ -11,7 +11,7 @@ import {
 import { notReachable } from "@/utils/notReachable";
 
 type Props = {
-  goal: GoalEntity;
+  goal: GoalDraft | GoalFormed;
 };
 
 export const GoalDraftCard = ({ goal }: Props): ReactNode => {
