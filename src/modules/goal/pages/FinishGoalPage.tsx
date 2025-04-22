@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 
 import { AcceptGoalForm } from "@/modules/goal/components/AcceptGoalForm";
 import { DeleteGoalForm } from "@/modules/goal/components/DeleteGoalForm";
+import { GoalFormedCard } from "@/modules/goal/components/GoalFormedCard";
 import { GoalLoader } from "@/modules/goal/components/GoalLoader";
+import { BuildGoalLayout } from "@/modules/goal/layouts/BuildGoalLayout";
 import { GoalEntity, GoalFormed } from "@/modules/goal/types/goal";
 import { GoalKpisLoader } from "@/modules/kpi/components/GoalKpisLoader";
 import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
 import { GoalSkillsLoader } from "@/modules/skills/components/GoalSkillsLoader";
-import { H1 } from "@/ui/custom/H1";
 import { notReachable } from "@/utils/notReachable";
 
 type Props = {
@@ -22,81 +23,78 @@ export const FinishGoalPage = ({ goalId }: Props) => {
   return (
     <GoalLoader goalId={goalId}>
       {({ hero, goal }) => (
-        <div className="flex flex-col gap-4">
-          <H1>Hey {hero.name}!</H1>
-          <p>{`Based on our conversation we identified that your goal is:`}</p>
-          <GoalKpisLoader goalId={goalId}>
-            {(kpis) => (
-              <FinishGoalChecker goal={goal} kpis={kpis}>
-                {(goal) => (
-                  <div className="flex flex-col gap-4">
-                    <strong>{goal.title}</strong>
-                    <p>{goal.description}</p>
+        <BuildGoalLayout hero={hero}>
+          <>
+            <GoalFormedCard goal={goal as GoalFormed} />
+            <GoalKpisLoader goalId={goalId}>
+              {(kpis) => (
+                <FinishGoalChecker goal={goal} kpis={kpis}>
+                  {(goal) => (
+                    <div className="flex flex-col gap-4">
+                      <p>{`You would like to measure it with these KPI's:`}</p>
+                      <ul className={""}>
+                        {kpis.map((kpi) => (
+                          <li key={kpi.id}>
+                            <strong>{kpi.title}</strong>
+                            <p>{kpi.description}</p>
+                            <div className={"flex flex-row gap-4"}>
+                              <p>
+                                Your target is <b>{kpi.targetValue}</b>
+                              </p>
+                              <p>
+                                Your current value is{" "}
+                                <b>
+                                  {kpi.measurements.length > 0
+                                    ? kpi.measurements[0].value
+                                    : "Not defined"}
+                                </b>
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
 
-                    <hr />
+                      <hr />
 
-                    <p>{`You would like to measure it with these KPI's:`}</p>
-                    <ul className={""}>
-                      {kpis.map((kpi) => (
-                        <li key={kpi.id}>
-                          <strong>{kpi.title}</strong>
-                          <p>{kpi.description}</p>
-                          <div className={"flex flex-row gap-4"}>
-                            <p>
-                              Your target is <b>{kpi.targetValue}</b>
-                            </p>
-                            <p>
-                              Your current value is{" "}
-                              <b>
-                                {kpi.measurements.length > 0
-                                  ? kpi.measurements[0].value
-                                  : "Not defined"}
-                              </b>
-                            </p>
+                      <GoalSkillsLoader goalId={goalId}>
+                        {(skills) => (
+                          <div className="flex flex-col gap-4">
+                            <p>{`List of skills that are needed to achieve this goal`}</p>
+                            <ul className={"flex flex-col gap-4"}>
+                              {skills.map((skill) => (
+                                <li
+                                  key={skill.id}
+                                  className={"flex flex-col gap-2"}
+                                >
+                                  <strong>{skill.title}</strong>
+                                  <p>{skill.description}</p>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                        </li>
-                      ))}
-                    </ul>
+                        )}
+                      </GoalSkillsLoader>
 
-                    <hr />
+                      <hr />
 
-                    <GoalSkillsLoader goalId={goalId}>
-                      {(skills) => (
-                        <div className="flex flex-col gap-4">
-                          <p>{`List of skills that are needed to achieve this goal`}</p>
-                          <ul className={"flex flex-col gap-4"}>
-                            {skills.map((skill) => (
-                              <li
-                                key={skill.id}
-                                className={"flex flex-col gap-2"}
-                              >
-                                <strong>{skill.title}</strong>
-                                <p>{skill.description}</p>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </GoalSkillsLoader>
-
-                    <hr />
-
-                    <div className={"flex flex-row justify-between gap-4"}>
-                      <DeleteGoalForm
-                        goal={goal}
-                        onMsg={() => router.replace(`/heroes/${hero.id}`)}
-                      />
-                      <AcceptGoalForm
-                        goal={goal}
-                        onMsg={() => router.replace(`/heroes/${hero.id}`)}
-                      />
+                      <div className={"flex flex-row justify-between gap-4"}>
+                        <DeleteGoalForm
+                          goal={goal}
+                          onMsg={() => router.replace(`/heroes/${hero.id}`)}
+                        />
+                        <AcceptGoalForm
+                          goal={goal}
+                          onMsg={() => router.replace(`/heroes/${hero.id}`)}
+                          disabled={false}
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </FinishGoalChecker>
-            )}
-          </GoalKpisLoader>
-        </div>
+                  )}
+                </FinishGoalChecker>
+              )}
+            </GoalKpisLoader>
+          </>
+        </BuildGoalLayout>
       )}
     </GoalLoader>
   );
@@ -126,6 +124,7 @@ const FinishGoalChecker = ({
 
       return children(goal);
 
+    case "review":
     case "active":
       throw new Error("Goal is already finished!");
 

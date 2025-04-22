@@ -9,7 +9,11 @@ function H1({ className, ...props }: React.ComponentProps<"h1">) {
 }
 
 function H2({ className, ...props }: React.ComponentProps<"h2">) {
-  return <h1 className={cn("text-xl font-bold", className)} {...props} />;
+  return <h2 className={cn("text-xl font-bold", className)} {...props} />;
 }
 
-export { H1, H2 };
+function H3({ className, ...props }: React.ComponentProps<"h2">) {
+  return <h3 className={cn("font-bold", className)} {...props} />;
+}
+
+export { H1, H2, H3 };

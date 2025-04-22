@@ -31,7 +31,6 @@ export const KpiDeclineForm = ({ kpi, onMsg }: Props): ReactNode => {
         break;
 
       case "loaded":
-        toast.success("Saved!");
         onMsg({ type: "onKpiSaved", kpi: state.data });
         reset();
         break;
@@ -43,6 +42,7 @@ export const KpiDeclineForm = ({ kpi, onMsg }: Props): ReactNode => {
 
   return (
     <Button
+      className={"bg-red-500"}
       loading={state.type === "loading"}
       onClick={() =>
         load({

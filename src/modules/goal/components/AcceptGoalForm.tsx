@@ -3,19 +3,20 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 import { acceptGoal } from "@/modules/goal/api/acceptGoal";
-import { GoalFormed } from "@/modules/goal/types/goal";
+import { GoalDraft, GoalFormed } from "@/modules/goal/types/goal";
 import { Button } from "@/ui/button";
 import { notReachable } from "@/utils/notReachable";
 import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
 
-type Msg = { type: "onGoalAccepted" };
+export type Msg = { type: "onGoalAccepted"; goal: GoalFormed };
 
 type Props = {
-  goal: GoalFormed;
+  goal: GoalDraft | GoalFormed;
+  disabled: boolean;
   onMsg: (msg: Msg) => void;
 };
 
-export const AcceptGoalForm = ({ goal, onMsg }: Props) => {
+export const AcceptGoalForm = ({ goal, disabled, onMsg }: Props) => {
   const { state, reset, load } = useLazyLoadableData(acceptGoal);
   useEffect(() => {
     switch (state.type) {
@@ -28,8 +29,8 @@ export const AcceptGoalForm = ({ goal, onMsg }: Props) => {
         break;
 
       case "loaded":
-        toast.success("Goal was created successfully");
-        onMsg({ type: "onGoalAccepted" });
+        toast.success("Goal definition was saved");
+        onMsg({ type: "onGoalAccepted", goal: state.data as GoalFormed });
         reset();
         break;
 
@@ -45,8 +46,9 @@ export const AcceptGoalForm = ({ goal, onMsg }: Props) => {
         <Button
           className={"grow bg-green-500"}
           onClick={() => load({ goalId: goal.id })}
+          disabled={disabled}
         >
-          Accept
+          Continue
         </Button>
       );
 
@@ -54,7 +56,7 @@ export const AcceptGoalForm = ({ goal, onMsg }: Props) => {
     case "loading":
       return (
         <Button className={"grow bg-green-500"} loading={true}>
-          Accept
+          Continue
         </Button>
       );
 

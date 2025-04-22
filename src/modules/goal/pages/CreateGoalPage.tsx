@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -12,19 +13,9 @@ import {
   CreateGoalData,
   CreateGoalFormSchema,
 } from "@/modules/goal/api/createGoal";
+import { GoalForm } from "@/modules/goal/components/GoalForm";
 import { HeroLoader } from "@/modules/hero/components/HeroLoader";
-import { Button } from "@/ui/button";
 import { H1 } from "@/ui/custom/H1";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/ui/form";
-import { Textarea } from "@/ui/textarea";
 import { notReachable } from "@/utils/notReachable";
 import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
 
@@ -38,6 +29,7 @@ export const CreateGoalPage = ({ heroId }: Props) => {
     resolver: zodResolver(CreateGoalFormSchema),
     defaultValues: {
       goal: "",
+      targetDate: format(new Date(), "yyyy-MM-dd"),
     },
   });
 
@@ -75,41 +67,11 @@ export const CreateGoalPage = ({ heroId }: Props) => {
             with the draft and try to organize them step by step
           </p>
           <div className={"w-full"}>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit((data) =>
-                  load({ ...data, heroId }),
-                )}
-                className="space-y-8"
-              >
-                <FormField
-                  control={form.control}
-                  name="goal"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your goal</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="What would you like to achieve?"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        {`You can enter detailed description of what you would
-                        like to achieve. It can be some personal wish or more
-                        abstract goal. For example: "I want to learn how to play
-                        guitar" or "I want to become a chess master".`}
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button type="submit" loading={state.type === "loading"}>
-                  Submit
-                </Button>
-              </form>
-            </Form>
+            <GoalForm
+              form={form}
+              isLoading={state.type === "loading"}
+              onSubmit={(data) => load({ ...data, heroId })}
+            />
           </div>
         </div>
       )}

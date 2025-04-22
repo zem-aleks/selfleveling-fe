@@ -60,7 +60,6 @@ export const KpiForm = ({ kpi, onMsg }: Props): ReactNode => {
         break;
 
       case "loaded":
-        toast.success("Saved!");
         onMsg({ type: "onKpiSaved", kpi: state.data });
         reset();
         break;

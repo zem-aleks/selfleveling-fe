@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from "axios";
 
 import { api } from "@/modules/auth/api/api";
-import { GoalEntity } from "@/modules/goal/types/goal";
+import { GoalActive, GoalFormed } from "@/modules/goal/types/goal";
 
 export const acceptGoal = async (
   { goalId }: { goalId: string },
   config?: AxiosRequestConfig,
-): Promise<{ goal: GoalEntity }> => {
+): Promise<GoalFormed | GoalActive> => {
   return api.patch(
     `/goals/${goalId}`,
     {},

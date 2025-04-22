@@ -1,5 +1,5 @@
 import { GoalEnhancedEntity } from "@/modules/goal/types/goal";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/ui/card";
+import { Card, CardHeader, CardTitle } from "@/ui/card";
 
 export const ActiveGoalsList = ({ goals }: { goals: GoalEnhancedEntity[] }) => {
   if (goals.length === 0) {
@@ -21,7 +21,7 @@ export const ActiveGoalsList = ({ goals }: { goals: GoalEnhancedEntity[] }) => {
               >
                 <div>{goal.title}</div>
               </CardTitle>
-              <CardDescription>{goal.description}</CardDescription>
+              {/*<CardDescription>{goal.description}</CardDescription>*/}
 
               <div className={"flex flex-col gap-2"}>
                 <ul>
