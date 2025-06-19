@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { ENV } from "@/config/client";
+import { ENV } from '@/config/client';
 
 const apiServerUrl = ENV.NEXT_PUBLIC_BACKEND_URL;
 let requestInterceptors: undefined | number;
@@ -8,7 +8,7 @@ let requestInterceptors: undefined | number;
 export const api = axios.create({
   baseURL: `${apiServerUrl}`,
   timeout: 300000,
-  headers: { "Content-Type": "application/json" },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 // Add a response interceptor
@@ -19,13 +19,13 @@ api.interceptors.response.use(
   (error) => {
     switch (error.code) {
       default:
-        return Promise.reject({ ...error, type: "unknown" });
+        return Promise.reject({ ...error, type: 'unknown' });
     }
   },
 );
 
 export const setApiAuth = (accessToken: string | undefined) => {
-  if (typeof requestInterceptors !== "undefined") {
+  if (typeof requestInterceptors !== 'undefined') {
     api.interceptors.request.eject(requestInterceptors);
   }
 

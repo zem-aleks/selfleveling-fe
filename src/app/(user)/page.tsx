@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { HeroesPage } from "@/modules/hero/pages/HeroesPage";
+import { HeroesPage } from '@/modules/hero/pages/HeroesPage';
 
 export default function Home() {
   return <HeroesPage />;

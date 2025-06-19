@@ -1,13 +1,12 @@
-import AuthContextProvider from "@/modules/auth/contexts/AuthContext";
+import AuthContextProvider from '@/modules/auth/contexts/AuthContext';
+import { Toaster } from '@/ui/sonner';
+
+import '../globals.css';
 
 export const metadata = {
-  title: "Selfleveling.ai",
-  description: "",
+  title: 'Selfleveling.ai',
+  description: '',
 };
-
-import { Toaster } from "@/ui/sonner";
-
-import "../globals.css";
 
 export default function RootLayout({
   children,

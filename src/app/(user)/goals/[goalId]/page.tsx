@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
+import { useParams } from 'next/navigation';
 
-import { BuildGoalPage } from "@/modules/goal/pages/BuildGoalPage";
+import { BuildGoalPage } from '@/modules/goal/pages/BuildGoalPage';
 
 export default function Page() {
   const params = useParams<{ goalId: string }>();

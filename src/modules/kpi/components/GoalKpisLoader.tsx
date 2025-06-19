@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import { getGoalKpis } from "@/modules/kpi/api/getGoalKpis";
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
-import { Button } from "@/ui/button";
-import { Label } from "@/ui/label";
-import { notReachable } from "@/utils/notReachable";
-import { useReloadableData } from "@/utils/useReloadableData";
+import { getGoalKpis } from '@/modules/kpi/api/getGoalKpis';
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
+import { Button } from '@/ui/button';
+import { Label } from '@/ui/label';
+import { notReachable } from '@/utils/notReachable';
+import { useReloadableData } from '@/utils/useReloadableData';
 
 type Props = {
   goalId: string;
@@ -19,16 +19,16 @@ export const GoalKpisLoader = ({ goalId, children }: Props): ReactNode => {
   const { state, reload } = useReloadableData(getGoalKpis, goalId);
 
   switch (state.type) {
-    case "loading":
+    case 'loading':
       return <>{`Preparing possible KPI's...`}</>;
 
-    case "reloading":
-    case "loaded":
+    case 'reloading':
+    case 'loaded':
       return <>{children(state.data, reload)}</>;
 
-    case "error":
+    case 'error':
       return (
-        <div className={"flex flex-col items-center gap-4"}>
+        <div className={'flex flex-col items-center gap-4'}>
           <Label>Something went wrong</Label>
           <Button onClick={reload}>Try again</Button>
         </div>

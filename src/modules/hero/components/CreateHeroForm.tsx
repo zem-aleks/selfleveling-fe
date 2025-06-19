@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import {
   createHero,
   CreateHeroData,
   CreateHeroFormSchema,
-} from "@/modules/hero/api/createHero";
-import { HeroEntity } from "@/modules/hero/types";
-import { Button } from "@/ui/button";
+} from '@/modules/hero/api/createHero';
+import { HeroEntity } from '@/modules/hero/types';
+import { Button } from '@/ui/button';
 import {
   Form,
   FormControl,
@@ -21,22 +21,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/ui/form";
-import { Input } from "@/ui/input";
+} from '@/ui/form';
+import { Input } from '@/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/ui/select";
-import { notReachable } from "@/utils/notReachable";
-import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
+} from '@/ui/select';
+import { notReachable } from '@/utils/notReachable';
+import { useLazyLoadableData } from '@/utils/useLazyLoadableData';
 
 const languages = [
-  { label: "English", value: "en" },
+  { label: 'English', value: 'en' },
   // { label: "Ukrainian", value: "ua" },
-  { label: "Polish", value: "pl" },
+  { label: 'Polish', value: 'pl' },
   // { label: "French", value: "fr" },
   // { label: "German", value: "de" },
   // { label: "Spanish", value: "es" },
@@ -47,7 +47,7 @@ const languages = [
   // { label: "Chinese", value: "zh" },
 ] as const;
 
-export type Msg = { type: "onHeroCreated"; hero: HeroEntity };
+export type Msg = { type: 'onHeroCreated'; hero: HeroEntity };
 
 type Props = {
   onMsg: (msg: Msg) => void;
@@ -57,8 +57,8 @@ export const CreateHeroForm = ({ onMsg }: Props) => {
   const form = useForm<CreateHeroData>({
     resolver: zodResolver(CreateHeroFormSchema),
     defaultValues: {
-      name: "",
-      language: "",
+      name: '',
+      language: '',
     },
   });
 
@@ -66,17 +66,17 @@ export const CreateHeroForm = ({ onMsg }: Props) => {
 
   useEffect(() => {
     switch (state.type) {
-      case "not_requested":
-      case "loading":
+      case 'not_requested':
+      case 'loading':
         break;
 
-      case "error":
+      case 'error':
         toast.error(state.error.response?.data.message || state.error.message);
         break;
 
-      case "loaded":
-        toast.success("Hero was created successfully");
-        onMsg({ type: "onHeroCreated", hero: state.data });
+      case 'loaded':
+        toast.success('Hero was created successfully');
+        onMsg({ type: 'onHeroCreated', hero: state.data });
         reset();
         break;
 
@@ -109,7 +109,7 @@ export const CreateHeroForm = ({ onMsg }: Props) => {
             <FormItem className="flex flex-col">
               <FormLabel>Language</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl className={"w-full"}>
+                <FormControl className={'w-full'}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select your language" />
                   </SelectTrigger>
@@ -127,7 +127,7 @@ export const CreateHeroForm = ({ onMsg }: Props) => {
             </FormItem>
           )}
         />
-        <Button type="submit" loading={state.type === "loading"}>
+        <Button type="submit" loading={state.type === 'loading'}>
           Submit
         </Button>
       </form>

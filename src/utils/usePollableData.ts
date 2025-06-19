@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
 
-import { notReachable } from "./notReachable";
+import { notReachable } from './notReachable';
 
 export type PollingData<Data, Params = undefined, E = Error> =
-  | { type: "loading"; params: Params }
-  | { type: "loaded"; data: Data; params: Params }
-  | { type: "reloading"; data: Data; params: Params }
-  | { type: "error"; error: E; params: Params }
-  | { type: "stopped"; data: Data | null; params: Params };
+  | { type: 'loading'; params: Params }
+  | { type: 'loaded'; data: Data; params: Params }
+  | { type: 'reloading'; data: Data; params: Params }
+  | { type: 'error'; error: E; params: Params }
+  | { type: 'stopped'; data: Data | null; params: Params };
 
 type ReturnType<Data, Params, Error> = {
   state: PollingData<Data, Params, Error>;
@@ -25,7 +25,7 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
   delay: number,
 ): ReturnType<Data, Params, E> => {
   const [state, setState] = useState<PollingData<Data, Params, E>>({
-    type: "loading",
+    type: 'loading',
     params,
   });
 
@@ -33,30 +33,30 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
   stateRef.current = state;
 
   const reload = useCallback(() => {
-    setState((state) => ({ ...state, type: "loading" }));
+    setState((state) => ({ ...state, type: 'loading' }));
   }, []);
 
   const stopPolling = useCallback(() => {
     switch (state.type) {
-      case "error":
-      case "loading":
+      case 'error':
+      case 'loading':
         setState((prevState) => ({
           ...prevState,
-          type: "stopped",
+          type: 'stopped',
           data: null,
         }));
         break;
 
-      case "reloading":
-      case "loaded":
+      case 'reloading':
+      case 'loaded':
         setState((prevState) => ({
           ...prevState,
-          type: "stopped",
+          type: 'stopped',
           data: state.data,
         }));
         break;
 
-      case "stopped":
+      case 'stopped':
         break;
 
       default:
@@ -66,17 +66,17 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
 
   const continuePolling = useCallback(() => {
     switch (state.type) {
-      case "error":
-      case "loading":
-      case "reloading":
-      case "loaded":
-        console.warn("Polling is not stopped");
+      case 'error':
+      case 'loading':
+      case 'reloading':
+      case 'loaded':
+        console.warn('Polling is not stopped');
         break;
 
-      case "stopped":
+      case 'stopped':
         if (state.data) {
           return setState({
-            type: "reloading",
+            type: 'reloading',
             data: state.data,
             params: state.params,
           });
@@ -93,13 +93,13 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
   const setData = useCallback(
     (data: Data) => {
       switch (state.type) {
-        case "loading":
-        case "error":
+        case 'loading':
+        case 'error':
           break;
 
-        case "reloading":
-        case "loaded":
-        case "stopped":
+        case 'reloading':
+        case 'loaded':
+        case 'stopped':
           setState({ ...state, data });
           break;
 
@@ -112,26 +112,26 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
 
   useEffect(() => {
     switch (state.type) {
-      case "reloading":
-      case "loading":
+      case 'reloading':
+      case 'loading':
         load(params)
           .then((data) => {
-            if (stateRef.current.type === "stopped") {
-              setState({ type: "stopped", data: data, params: state.params });
+            if (stateRef.current.type === 'stopped') {
+              setState({ type: 'stopped', data: data, params: state.params });
             } else {
-              setState({ type: "loaded", data: data, params: state.params });
+              setState({ type: 'loaded', data: data, params: state.params });
             }
           })
           .catch((error) => {
-            setState({ type: "error", error, params: state.params });
+            setState({ type: 'error', error, params: state.params });
           });
         break;
 
-      case "loaded":
+      case 'loaded':
         const timer = setTimeout(() => {
-          if (stateRef.current.type === "loaded") {
+          if (stateRef.current.type === 'loaded') {
             setState({
-              type: "reloading",
+              type: 'reloading',
               data: state.data,
               params: state.params,
             });
@@ -140,8 +140,8 @@ export const usePollingData = <Data, Params = undefined, E = AxiosError<Error>>(
 
         return () => clearTimeout(timer);
 
-      case "stopped":
-      case "error":
+      case 'stopped':
+      case 'error':
         break;
 
       default:

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { ReactNode, useContext, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, { ReactNode, useContext, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { AuthLayout } from "@/modules/auth/components/AuthLayout";
-import { AuthContext } from "@/modules/auth/contexts/AuthContext";
-import { notReachable } from "@/utils/notReachable";
+import { AuthLayout } from '@/modules/auth/components/AuthLayout';
+import { AuthContext } from '@/modules/auth/contexts/AuthContext';
+import { notReachable } from '@/utils/notReachable';
 
 type Props = {
   children: ReactNode;
@@ -17,13 +17,13 @@ export const AuthGuard = ({ children }: Props): ReactNode => {
 
   useEffect(() => {
     switch (state.type) {
-      case "error":
-      case "signedOut":
-        router.replace("/login");
+      case 'error':
+      case 'signedOut':
+        router.replace('/login');
         break;
 
-      case "loading":
-      case "signedIn":
+      case 'loading':
+      case 'signedIn':
         break;
 
       default:
@@ -32,12 +32,12 @@ export const AuthGuard = ({ children }: Props): ReactNode => {
   }, [router, state]);
 
   switch (state.type) {
-    case "error":
-    case "signedOut":
-    case "loading":
+    case 'error':
+    case 'signedOut':
+    case 'loading':
       return <AuthLayout>Loading...</AuthLayout>;
 
-    case "signedIn":
+    case 'signedIn':
       return <>{children}</>;
 
     default:

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { ActiveGoalsList } from "@/modules/goal/components/ActiveGoalsList";
-import { DraftGoalsList } from "@/modules/goal/components/DraftGoalsList";
-import { HeroGoalDraftsLoader } from "@/modules/goal/components/HeroGoalDraftsLoader";
-import { HeroGoalsLoader } from "@/modules/goal/components/HeroGoalsLoader";
-import { HeroLoader } from "@/modules/hero/components/HeroLoader";
-import { HeroSkillsLoader } from "@/modules/skills/components/HeroSkillsLoader";
-import { SkillsList } from "@/modules/skills/components/SkillsList";
-import { Button } from "@/ui/button";
-import { H1, H2 } from "@/ui/custom/H1";
-import { notReachable } from "@/utils/notReachable";
+import { ActiveGoalsList } from '@/modules/goal/components/ActiveGoalsList';
+import { DraftGoalsList } from '@/modules/goal/components/DraftGoalsList';
+import { HeroGoalDraftsLoader } from '@/modules/goal/components/HeroGoalDraftsLoader';
+import { HeroGoalsLoader } from '@/modules/goal/components/HeroGoalsLoader';
+import { HeroLoader } from '@/modules/hero/components/HeroLoader';
+import { HeroSkillsLoader } from '@/modules/skills/components/HeroSkillsLoader';
+import { SkillsList } from '@/modules/skills/components/SkillsList';
+import { Button } from '@/ui/button';
+import { H1, H2 } from '@/ui/custom/H1';
+import { notReachable } from '@/utils/notReachable';
 
 type Props = {
   heroId: string;
@@ -24,11 +24,11 @@ export const HeroPage = ({ heroId }: Props) => {
         <div className="flex flex-col items-center gap-4">
           <div
             className={
-              "flex w-full flex-row items-center justify-between gap-4 py-2 pt-4"
+              'flex w-full flex-row items-center justify-between gap-4 py-2 pt-4'
             }
           >
             <Link href={`/`}>
-              <Button variant={"outline"}>Back</Button>
+              <Button variant={'outline'}>Back</Button>
             </Link>
             <H1>Hero {hero.name}</H1>
             <Link href={`/heroes/${heroId}/goal`}>
@@ -36,18 +36,18 @@ export const HeroPage = ({ heroId }: Props) => {
             </Link>
           </div>
 
-          <hr className={"w-full"} />
+          <hr className={'w-full'} />
 
-          <div className={"flex w-full flex-col items-start gap-4"}>
+          <div className={'flex w-full flex-col items-start gap-4'}>
             <H2>Goals</H2>
             <HeroGoalsLoader heroId={heroId}>
               {(goals) => <ActiveGoalsList goals={goals} />}
             </HeroGoalsLoader>
           </div>
 
-          <hr className={"w-full"} />
+          <hr className={'w-full'} />
 
-          <div className={"flex w-full flex-col items-start gap-4"}>
+          <div className={'flex w-full flex-col items-start gap-4'}>
             <H2>Goal Drafts</H2>
             <HeroGoalDraftsLoader heroId={heroId}>
               {(goals, reload) => (
@@ -55,7 +55,7 @@ export const HeroPage = ({ heroId }: Props) => {
                   goals={goals}
                   onMsg={(msg) => {
                     switch (msg.type) {
-                      case "onGoalDeleted":
+                      case 'onGoalDeleted':
                         reload();
                         break;
 
@@ -68,9 +68,9 @@ export const HeroPage = ({ heroId }: Props) => {
             </HeroGoalDraftsLoader>
           </div>
 
-          <hr className={"w-full"} />
+          <hr className={'w-full'} />
 
-          <div className={"flex w-full flex-col items-start gap-4"}>
+          <div className={'flex w-full flex-col items-start gap-4'}>
             <H2>Skills</H2>
 
             <HeroSkillsLoader heroId={heroId}>

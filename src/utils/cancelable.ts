@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
 export type CancelRequestError = Error & {
-  type: "canceledRequest";
+  type: 'canceledRequest';
 };
 
 export type CancelablePromise<Data> = [Promise<Data>, () => void];

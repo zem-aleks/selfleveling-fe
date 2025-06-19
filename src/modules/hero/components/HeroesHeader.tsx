@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import {
   CreateHeroForm,
   Msg as CreateHeroFormMsg,
-} from "@/modules/hero/components/CreateHeroForm";
-import { Button } from "@/ui/button";
-import { H1 } from "@/ui/custom/H1";
+} from '@/modules/hero/components/CreateHeroForm';
+import { Button } from '@/ui/button';
+import { H1 } from '@/ui/custom/H1';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/ui/dialog";
-import { notReachable } from "@/utils/notReachable";
+} from '@/ui/dialog';
+import { notReachable } from '@/utils/notReachable';
 
 export type Msg = CreateHeroFormMsg;
 
@@ -24,7 +24,7 @@ type Props = {
 export const HeroesHeader = ({ onMsg }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div className={"flex flex-row items-center justify-between"}>
+    <div className={'flex flex-row items-center justify-between'}>
       <H1>Heroes</H1>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -39,7 +39,7 @@ export const HeroesHeader = ({ onMsg }: Props) => {
           <CreateHeroForm
             onMsg={(msg) => {
               switch (msg.type) {
-                case "onHeroCreated":
+                case 'onHeroCreated':
                   setOpen(false);
                   onMsg(msg);
                   break;

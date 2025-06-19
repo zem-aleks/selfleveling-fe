@@ -60,7 +60,7 @@ type GoalKpi = {
 type GoalLevel = {
   id: string;
   level: number;
-  status: "active" | "accomplished";
+  status: 'active' | 'accomplished';
   goalId: string;
   // the value is aggregated with previous levels points
   experienceNeeded: number; // how many experience points are needed to level up, use logarithmic growth to calculate next level (base XP & log(level) + 1)
@@ -68,7 +68,7 @@ type GoalLevel = {
 };
 
 type Quest = {
-  type: "timebased";
+  type: 'timebased';
   title: string;
   description: string;
   goalId: string;
@@ -85,27 +85,27 @@ type PathProgress = {
 const quests: Quest[] = [];
 
 const goal1: Goal = {
-  id: "goal-id-1",
-  name: "Weight loss",
-  logoUrl: "https://example.com/logo.png",
-  description: "Improve my body shape",
+  id: 'goal-id-1',
+  name: 'Weight loss',
+  logoUrl: 'https://example.com/logo.png',
+  description: 'Improve my body shape',
   levels: [
     {
-      id: "level-id-1",
+      id: 'level-id-1',
       level: 1,
-      status: "active",
-      goalId: "goal-id-1",
+      status: 'active',
+      goalId: 'goal-id-1',
       experienceNeeded: 100,
-      accomplishmentSummary: "",
+      accomplishmentSummary: '',
     },
   ],
   skills: [
     {
-      id: "skill-id-1",
-      name: "Strength",
-      logoUrl: "https://example.com/strength.png",
-      description: "How strong you are",
-      goalId: "goal-id-1",
+      id: 'skill-id-1',
+      name: 'Strength',
+      logoUrl: 'https://example.com/strength.png',
+      description: 'How strong you are',
+      goalId: 'goal-id-1',
       level: 1,
       experience: 0,
       experienceToTheNextLevel: 100,
@@ -113,25 +113,25 @@ const goal1: Goal = {
   ],
   kpis: [
     {
-      goalId: "goal-id-1",
-      id: "kpi-id-1",
-      title: "Weight",
-      startingPoint: "115kg",
-      endingPoint: "100kg",
+      goalId: 'goal-id-1',
+      id: 'kpi-id-1',
+      title: 'Weight',
+      startingPoint: '115kg',
+      endingPoint: '100kg',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
   ],
   measurements: [
     {
-      id: "measurement-id-1",
-      kpiId: "kpi-id-1",
-      goalId: "goal-id-1",
-      currentPoint: "114kg",
+      id: 'measurement-id-1',
+      kpiId: 'kpi-id-1',
+      goalId: 'goal-id-1',
+      currentPoint: '114kg',
       currentLevel: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
-      comments: "I am doing well",
+      comments: 'I am doing well',
     },
   ],
   createdAt: new Date(),
@@ -140,13 +140,13 @@ const goal1: Goal = {
 };
 
 const alexTheHero: Hero = {
-  id: "hero-id-1",
-  name: "Alex",
-  language: "en",
+  id: 'hero-id-1',
+  name: 'Alex',
+  language: 'en',
   goals: [goal1],
 };
 
 const user: User = {
-  id: "user-id-1",
+  id: 'user-id-1',
   heroes: [alexTheHero],
 };

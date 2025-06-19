@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
-import { api } from "@/modules/auth/api/api";
-import { SkillEntity } from "@/modules/skills/types/entity";
+import { api } from '@/modules/auth/api/api';
+import { SkillEntity } from '@/modules/skills/types/entity';
 
 export const getHeroSkills = async (
   heroId: string,

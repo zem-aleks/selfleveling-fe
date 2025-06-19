@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
-import { api } from "@/modules/auth/api/api";
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
+import { api } from '@/modules/auth/api/api';
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
 
 export const getGoalKpis = async (
   goalId: string,

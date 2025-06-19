@@ -1,15 +1,15 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from 'react';
 
-import { toast } from "sonner";
+import { toast } from 'sonner';
 
-import { GoalFormed } from "@/modules/goal/types/goal";
-import { saveKpi } from "@/modules/kpi/api/saveKpi";
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
-import { Button } from "@/ui/button";
-import { notReachable } from "@/utils/notReachable";
-import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
+import { GoalFormed } from '@/modules/goal/types/goal';
+import { saveKpi } from '@/modules/kpi/api/saveKpi';
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
+import { Button } from '@/ui/button';
+import { notReachable } from '@/utils/notReachable';
+import { useLazyLoadableData } from '@/utils/useLazyLoadableData';
 
-export type Msg = { type: "onKpiSaved"; kpi: KpiWithMeasurementsEntity };
+export type Msg = { type: 'onKpiSaved'; kpi: KpiWithMeasurementsEntity };
 
 type Props = {
   goal: GoalFormed;
@@ -22,16 +22,16 @@ export const KpiDeclineForm = ({ kpi, onMsg }: Props): ReactNode => {
 
   useEffect(() => {
     switch (state.type) {
-      case "not_requested":
-      case "loading":
+      case 'not_requested':
+      case 'loading':
         break;
 
-      case "error":
+      case 'error':
         toast.error(state.error.response?.data.message || state.error.message);
         break;
 
-      case "loaded":
-        onMsg({ type: "onKpiSaved", kpi: state.data });
+      case 'loaded':
+        onMsg({ type: 'onKpiSaved', kpi: state.data });
         reset();
         break;
 
@@ -42,8 +42,8 @@ export const KpiDeclineForm = ({ kpi, onMsg }: Props): ReactNode => {
 
   return (
     <Button
-      className={"bg-red-500"}
-      loading={state.type === "loading"}
+      className={'bg-red-500'}
+      loading={state.type === 'loading'}
       onClick={() =>
         load({
           kpiId: kpi.id,
@@ -51,8 +51,8 @@ export const KpiDeclineForm = ({ kpi, onMsg }: Props): ReactNode => {
           targetValue: kpi.targetValue,
           description: kpi.description,
           currentValue:
-            kpi.measurements.length > 0 ? kpi.measurements[0].value : "n/a",
-          status: "draft",
+            kpi.measurements.length > 0 ? kpi.measurements[0].value : 'n/a',
+          status: 'draft',
         })
       }
     >

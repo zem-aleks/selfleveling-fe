@@ -1,11 +1,11 @@
-import { MeasurementEntity } from "./measurement";
+import { MeasurementEntity } from './measurement';
 
 export type KpiEntity = {
   id: string;
   title: string;
   description: string;
   targetValue: string;
-  status: "draft" | "active";
+  status: 'draft' | 'active';
   createdAt: Date;
   updatedAt: Date;
   goalId: string;

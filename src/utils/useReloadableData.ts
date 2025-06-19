@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-import { AxiosError, AxiosRequestConfig } from "axios";
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
-import { cancelable } from "@/utils/cancelable";
+import { cancelable } from '@/utils/cancelable';
 
-import { notReachable } from "./notReachable";
+import { notReachable } from './notReachable';
 
 export type ReloadableData<Data, Params, E = AxiosError<Error>> =
-  | { type: "loading"; params: Params }
-  | { type: "loaded"; data: Data; params: Params }
-  | { type: "reloading"; data: Data; params: Params }
-  | { type: "error"; error: E; params: Params };
+  | { type: 'loading'; params: Params }
+  | { type: 'loaded'; data: Data; params: Params }
+  | { type: 'reloading'; data: Data; params: Params }
+  | { type: 'error'; error: E; params: Params };
 
 type ReturnType<Data, Params, Error> = {
   state: ReloadableData<Data, Params, Error>;
@@ -27,23 +27,23 @@ export const useReloadableData = <
   params: Params,
 ): ReturnType<Data, Params, E> => {
   const [state, setState] = useState<ReloadableData<Data, Params, E>>({
-    type: "loading",
+    type: 'loading',
     params: params,
   });
 
   const reload = useCallback(() => {
     switch (state.type) {
-      case "loading":
-        setState({ type: "loading", params });
+      case 'loading':
+        setState({ type: 'loading', params });
         break;
 
-      case "reloading":
-      case "loaded":
-        setState({ type: "reloading", params, data: state.data });
+      case 'reloading':
+      case 'loaded':
+        setState({ type: 'reloading', params, data: state.data });
         break;
 
-      case "error":
-        setState({ type: "loading", params });
+      case 'error':
+        setState({ type: 'loading', params });
         break;
 
       default:
@@ -64,27 +64,27 @@ export const useReloadableData = <
 
   useEffect(() => {
     switch (state.type) {
-      case "reloading":
-      case "loading": {
+      case 'reloading':
+      case 'loading': {
         const [promise, cancel] = cancelable((config) =>
           load(state.params, config),
         );
 
         promise
           .then((data) => {
-            setState({ type: "loaded", data: data, params: state.params });
+            setState({ type: 'loaded', data: data, params: state.params });
           })
           .catch((error) => {
-            if (error.type !== "canceledRequest") {
-              setState({ type: "error", error, params: state.params });
+            if (error.type !== 'canceledRequest') {
+              setState({ type: 'error', error, params: state.params });
             }
           });
 
         return cancel;
       }
 
-      case "loaded":
-      case "error":
+      case 'loaded':
+      case 'error':
         break;
 
       default:
@@ -95,12 +95,12 @@ export const useReloadableData = <
   const setData = useCallback(
     (data: Data) => {
       switch (state.type) {
-        case "loading":
-        case "error":
+        case 'loading':
+        case 'error':
           break;
 
-        case "reloading":
-        case "loaded":
+        case 'reloading':
+        case 'loaded':
           setState({ ...state, data });
           break;
 

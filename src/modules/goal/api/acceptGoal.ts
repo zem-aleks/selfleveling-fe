@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
-import { api } from "@/modules/auth/api/api";
-import { GoalActive, GoalFormed } from "@/modules/goal/types/goal";
+import { api } from '@/modules/auth/api/api';
+import { GoalActive, GoalFormed } from '@/modules/goal/types/goal';
 
 export const acceptGoal = async (
   { goalId }: { goalId: string },

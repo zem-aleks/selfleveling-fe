@@ -1,6 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
-import { ENV } from "@/config/client";
+import { ENV } from '@/config/client';
 
 // Create a single supabase client for interacting with your database
 export const supabase = createClient(

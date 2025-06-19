@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import { AcceptGoalForm } from "@/modules/goal/components/AcceptGoalForm";
-import { GoalFormed } from "@/modules/goal/types/goal";
-import { DraftKpisLoader } from "@/modules/kpi/components/DraftKpisLoader";
-import { KpiItemEdit } from "@/modules/kpi/components/KpiItemEdit";
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
-import { H2 } from "@/ui/custom/H1";
-import { notReachable } from "@/utils/notReachable";
+import { AcceptGoalForm } from '@/modules/goal/components/AcceptGoalForm';
+import { GoalFormed } from '@/modules/goal/types/goal';
+import { DraftKpisLoader } from '@/modules/kpi/components/DraftKpisLoader';
+import { KpiItemEdit } from '@/modules/kpi/components/KpiItemEdit';
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
+import { Card, CardContent, CardHeader, CardTitle } from '@/ui/card';
+import { H2 } from '@/ui/custom/H1';
+import { notReachable } from '@/utils/notReachable';
 
-type Msg = { type: "onGoalAccepted" };
+type Msg = { type: 'onGoalAccepted' };
 
 type Props = {
   goal: GoalFormed;
@@ -38,7 +38,7 @@ const Builder = ({
   onMsg: (msg: Msg) => void;
 }) => {
   const hasActiveKpis =
-    kpis.filter((kpi) => kpi.status === "active").length > 0;
+    kpis.filter((kpi) => kpi.status === 'active').length > 0;
 
   return (
     <Card>
@@ -50,8 +50,8 @@ const Builder = ({
           goal={goal}
           onMsg={(msg) => {
             switch (msg.type) {
-              case "onGoalAccepted":
-                onMsg({ type: "onGoalAccepted" });
+              case 'onGoalAccepted':
+                onMsg({ type: 'onGoalAccepted' });
                 break;
 
               default:
@@ -62,13 +62,13 @@ const Builder = ({
         />
 
         {!hasActiveKpis && (
-          <p className={"text-sm text-gray-500"}>
+          <p className={'text-sm text-gray-500'}>
             At least one KPI has to be defined
           </p>
         )}
       </CardHeader>
       <CardContent>
-        <div className={"flex flex-col gap-4"}>
+        <div className={'flex flex-col gap-4'}>
           {kpis.map((kpi) => (
             <KpiItemEdit
               key={kpi.id}
@@ -76,7 +76,7 @@ const Builder = ({
               kpi={kpi}
               onMsg={(msg) => {
                 switch (msg.type) {
-                  case "onKpiSaved":
+                  case 'onKpiSaved':
                     reload();
                     break;
 

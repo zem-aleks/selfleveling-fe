@@ -1,8 +1,8 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
-import { api } from "@/modules/auth/api/api";
-import { CreateGoalData } from "@/modules/goal/api/createGoal";
-import { GoalEntity } from "@/modules/goal/types/goal";
+import { api } from '@/modules/auth/api/api';
+import { CreateGoalData } from '@/modules/goal/api/createGoal';
+import { GoalEntity } from '@/modules/goal/types/goal';
 
 export const updateGoal = async (
   { goalId, ...data }: CreateGoalData & { goalId: string },

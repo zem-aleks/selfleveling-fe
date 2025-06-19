@@ -1,17 +1,17 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from 'react';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
-import { GoalFormed } from "@/modules/goal/types/goal";
+import { GoalFormed } from '@/modules/goal/types/goal';
 import {
   saveKpi,
   SaveKpiData,
   SaveKpiFormSchema,
-} from "@/modules/kpi/api/saveKpi";
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
-import { Button } from "@/ui/button";
+} from '@/modules/kpi/api/saveKpi';
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
+import { Button } from '@/ui/button';
 import {
   Form,
   FormControl,
@@ -19,15 +19,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/ui/form";
-import { Input } from "@/ui/input";
-import { Textarea } from "@/ui/textarea";
-import { notReachable } from "@/utils/notReachable";
-import { useLazyLoadableData } from "@/utils/useLazyLoadableData";
+} from '@/ui/form';
+import { Input } from '@/ui/input';
+import { Textarea } from '@/ui/textarea';
+import { notReachable } from '@/utils/notReachable';
+import { useLazyLoadableData } from '@/utils/useLazyLoadableData';
 
 export type Msg =
-  | { type: "onKpiSaved"; kpi: KpiWithMeasurementsEntity }
-  | { type: "onCancel" };
+  | { type: 'onKpiSaved'; kpi: KpiWithMeasurementsEntity }
+  | { type: 'onCancel' };
 
 type Props = {
   goal: GoalFormed;
@@ -42,7 +42,7 @@ export const KpiForm = ({ kpi, onMsg }: Props): ReactNode => {
       title: kpi.title,
       description: kpi.description,
       targetValue: kpi.targetValue,
-      currentValue: kpi.measurements.length ? kpi.measurements[0].value : "",
+      currentValue: kpi.measurements.length ? kpi.measurements[0].value : '',
       status: kpi.status,
     },
   });
@@ -51,16 +51,16 @@ export const KpiForm = ({ kpi, onMsg }: Props): ReactNode => {
 
   useEffect(() => {
     switch (state.type) {
-      case "not_requested":
-      case "loading":
+      case 'not_requested':
+      case 'loading':
         break;
 
-      case "error":
+      case 'error':
         toast.error(state.error.response?.data.message || state.error.message);
         break;
 
-      case "loaded":
-        onMsg({ type: "onKpiSaved", kpi: state.data });
+      case 'loaded':
+        onMsg({ type: 'onKpiSaved', kpi: state.data });
         reset();
         break;
 
@@ -74,7 +74,7 @@ export const KpiForm = ({ kpi, onMsg }: Props): ReactNode => {
       <form
         onSubmit={form.handleSubmit((data) => load({ ...data, kpiId: kpi.id }))}
       >
-        <div className={"flex flex-col gap-3"} key={kpi.id}>
+        <div className={'flex flex-col gap-3'} key={kpi.id}>
           <FormField
             control={form.control}
             name="title"
@@ -131,21 +131,21 @@ export const KpiForm = ({ kpi, onMsg }: Props): ReactNode => {
             )}
           />
 
-          <div className={"flex w-full flex-row gap-3"}>
+          <div className={'flex w-full flex-row gap-3'}>
             <Button
-              className={"grow"}
-              onClick={() => onMsg({ type: "onCancel" })}
-              variant={"outline"}
+              className={'grow'}
+              onClick={() => onMsg({ type: 'onCancel' })}
+              variant={'outline'}
             >
               Cancel
             </Button>
             <Button
-              className={"grow"}
+              className={'grow'}
               onClick={() => {
-                form.setValue("status", "active");
+                form.setValue('status', 'active');
               }}
-              type={"submit"}
-              loading={state.type === "loading"}
+              type={'submit'}
+              loading={state.type === 'loading'}
             >
               Accept
             </Button>

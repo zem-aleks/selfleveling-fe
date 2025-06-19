@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
 
-import { api } from "@/modules/auth/api/api";
-import { GoalDraft, GoalFormed } from "@/modules/goal/types/goal";
+import { api } from '@/modules/auth/api/api';
+import { GoalDraft, GoalFormed } from '@/modules/goal/types/goal';
 
 export const getHeroGoalDrafts = async (
   heroId: string,

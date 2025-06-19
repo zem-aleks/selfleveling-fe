@@ -1,6 +1,6 @@
-import { KpiWithMeasurementsEntity } from "@/modules/kpi/types";
+import { KpiWithMeasurementsEntity } from '@/modules/kpi/types';
 
-import { SkillEntity } from "../../skills/types/entity";
+import { SkillEntity } from '../../skills/types/entity';
 
 export type GoalEvaluation = {
   specificScore: number;
@@ -22,20 +22,20 @@ type GoalCommonFields = {
 };
 
 export type GoalDraft = GoalCommonFields & {
-  status: "draft";
+  status: 'draft';
 };
 
 export type GoalFormed = GoalCommonFields & {
   title: string;
-  status: "formed";
+  status: 'formed';
 };
 
-export type GoalReview = Omit<GoalFormed, "status"> & {
-  status: "review";
+export type GoalReview = Omit<GoalFormed, 'status'> & {
+  status: 'review';
 };
 
-export type GoalActive = Omit<GoalReview, "status"> & {
-  status: "active";
+export type GoalActive = Omit<GoalReview, 'status'> & {
+  status: 'active';
 };
 
 export type GoalEntity = GoalDraft | GoalFormed | GoalActive | GoalReview;

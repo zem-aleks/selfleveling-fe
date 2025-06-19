@@ -1,4 +1,4 @@
-export type SkillStatus = "draft" | "active";
+export type SkillStatus = 'draft' | 'active';
 
 export type SkillEntity = {
   id: string;

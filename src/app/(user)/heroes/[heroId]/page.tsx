@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
+import { useParams } from 'next/navigation';
 
-import { HeroPage } from "@/modules/hero/pages/HeroPage";
+import { HeroPage } from '@/modules/hero/pages/HeroPage';
 
 export default function Page() {
   const params = useParams<{ heroId: string }>();

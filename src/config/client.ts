@@ -4,10 +4,10 @@
  * NOTE: Variables are prefixed with NEXT_PUBLIC_ to make them available to the client
  * @see https://nextjs.org/docs/app/building-your-application/configuring/environment-variables
  */
-import { z } from "zod";
+import { z } from 'zod';
 
 const envSchema = z.object({
-  NEXT_PUBLIC_ENVIRONMENT: z.enum(["development", "staging", "production"]),
+  NEXT_PUBLIC_ENVIRONMENT: z.enum(['development', 'staging', 'production']),
   NEXT_PUBLIC_BACKEND_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),

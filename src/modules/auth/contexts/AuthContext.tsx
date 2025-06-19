@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   createContext,
@@ -6,20 +6,20 @@ import React, {
   useCallback,
   useEffect,
   useState,
-} from "react";
+} from 'react';
 
-import { Session } from "@supabase/auth-js";
+import { Session } from '@supabase/auth-js';
 
-import { supabase } from "@/config/supabase";
-import { api, setApiAuth } from "@/modules/auth/api/api";
-import { AuthLayout } from "@/modules/auth/components/AuthLayout";
-import { noOperation, notReachable } from "@/utils/notReachable";
+import { supabase } from '@/config/supabase';
+import { api, setApiAuth } from '@/modules/auth/api/api';
+import { AuthLayout } from '@/modules/auth/components/AuthLayout';
+import { noOperation, notReachable } from '@/utils/notReachable';
 
 type AuthContextState =
-  | { type: "loading" }
-  | { type: "signedOut" }
-  | { type: "signedIn"; session: Session; user: User }
-  | { type: "error"; error: string };
+  | { type: 'loading' }
+  | { type: 'signedOut' }
+  | { type: 'signedIn'; session: Session; user: User }
+  | { type: 'error'; error: string };
 
 type AuthContextData = {
   state: AuthContextState;
@@ -30,7 +30,7 @@ type AuthContextData = {
 };
 
 const emptyContextValue: AuthContextData = {
-  state: { type: "signedOut" },
+  state: { type: 'signedOut' },
   reload: noOperation,
   reloadUser: noOperation,
   setUserData: noOperation,
@@ -44,58 +44,58 @@ export default function AuthContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [state, setState] = useState<AuthContextState>({ type: "loading" });
+  const [state, setState] = useState<AuthContextState>({ type: 'loading' });
 
   useEffect(() => {
-    if (state.type === "error") {
+    if (state.type === 'error') {
       return;
     }
 
     const subscription = supabase.auth.onAuthStateChange((event, session) => {
       switch (event) {
-        case "SIGNED_OUT": {
-          setState({ type: "signedOut" });
+        case 'SIGNED_OUT': {
+          setState({ type: 'signedOut' });
           break;
         }
 
-        case "PASSWORD_RECOVERY":
-        case "USER_UPDATED":
-        case "MFA_CHALLENGE_VERIFIED":
+        case 'PASSWORD_RECOVERY':
+        case 'USER_UPDATED':
+        case 'MFA_CHALLENGE_VERIFIED':
           break;
 
-        case "TOKEN_REFRESHED": {
+        case 'TOKEN_REFRESHED': {
           if (session) {
             setApiAuth(session.access_token);
           }
           break;
         }
 
-        case "INITIAL_SESSION":
-        case "SIGNED_IN": {
+        case 'INITIAL_SESSION':
+        case 'SIGNED_IN': {
           if (!session) {
-            if (state.type !== "signedOut") {
-              setState({ type: "signedOut" });
+            if (state.type !== 'signedOut') {
+              setState({ type: 'signedOut' });
             }
             break;
           }
 
-          if (state.type === "signedIn") {
+          if (state.type === 'signedIn') {
             break;
           }
 
           setApiAuth(session.access_token);
           // TODO: check response properly
           api
-            .get("/auth/me")
+            .get('/auth/me')
             .then((res) => {
               setState({
-                type: "signedIn",
+                type: 'signedIn',
                 session,
                 user: res as unknown as User,
               });
             })
             .catch((error) => {
-              setState({ type: "error", error: `${error.message}` });
+              setState({ type: 'error', error: `${error.message}` });
               console.warn(error);
             });
 
@@ -114,19 +114,19 @@ export default function AuthContextProvider({
 
   const reload = useCallback(() => {
     supabase.auth.signOut().then(() => {
-      setState({ type: "loading" });
+      setState({ type: 'loading' });
     });
   }, []);
 
   const setUserData = useCallback(
     (userData: User) => {
       switch (state.type) {
-        case "loading":
-        case "signedOut":
-        case "error":
+        case 'loading':
+        case 'signedOut':
+        case 'error':
           break;
 
-        case "signedIn":
+        case 'signedIn':
           setState({ ...state, user: userData });
           break;
 
@@ -143,19 +143,19 @@ export default function AuthContextProvider({
 
   const reloadUser = useCallback(() => {
     switch (state.type) {
-      case "loading":
-      case "signedOut":
-      case "error":
+      case 'loading':
+      case 'signedOut':
+      case 'error':
         break;
 
-      case "signedIn":
+      case 'signedIn':
         api
-          .get("/auth/me")
+          .get('/auth/me')
           .then((res) => {
             setUserData(res as unknown as User);
           })
           .catch((error) => {
-            setState({ type: "error", error: `${error.message}` });
+            setState({ type: 'error', error: `${error.message}` });
             console.warn(error);
           });
         break;
@@ -167,12 +167,12 @@ export default function AuthContextProvider({
   }, [state]);
 
   switch (state.type) {
-    case "loading":
+    case 'loading':
       return <AuthLayout>Loading...</AuthLayout>;
 
-    case "error":
-    case "signedOut":
-    case "signedIn":
+    case 'error':
+    case 'signedOut':
+    case 'signedIn':
       return (
         <AuthContext.Provider
           value={{
