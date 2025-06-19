@@ -6,6 +6,7 @@ import { ActiveGoalsList } from '@/modules/goal/components/ActiveGoalsList';
 import { DraftGoalsList } from '@/modules/goal/components/DraftGoalsList';
 import { HeroGoalDraftsLoader } from '@/modules/goal/components/HeroGoalDraftsLoader';
 import { HeroGoalsLoader } from '@/modules/goal/components/HeroGoalsLoader';
+import { HeroAttributes } from '@/modules/hero/components/HeroAttributes';
 import { HeroLoader } from '@/modules/hero/components/HeroLoader';
 import { HeroSkillsLoader } from '@/modules/skills/components/HeroSkillsLoader';
 import { SkillsList } from '@/modules/skills/components/SkillsList';
@@ -35,6 +36,10 @@ export const HeroPage = ({ heroId }: Props) => {
               <Button>Create Goal</Button>
             </Link>
           </div>
+
+          <hr className={'w-full'} />
+
+          <HeroAttributes hero={hero} />
 
           <hr className={'w-full'} />
 

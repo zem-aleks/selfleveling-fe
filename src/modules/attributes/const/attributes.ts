@@ -1,4 +1,4 @@
-import { Attribute } from '../types/attribute';
+import { Attribute, AttributeId } from '../types/attribute';
 
 export const ATTRIBUTES: Attribute[] = [
   {
@@ -44,3 +44,7 @@ export const ATTRIBUTES: Attribute[] = [
     icon: 'fa-solid fa-clipboard-check',
   },
 ];
+
+export const ATTRIBUTES_MAP = new Map<AttributeId, Attribute>(
+  ATTRIBUTES.map((attribute) => [attribute.id, attribute]),
+);
