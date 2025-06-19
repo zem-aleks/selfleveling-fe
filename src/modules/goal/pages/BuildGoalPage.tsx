@@ -1,19 +1,22 @@
-"use client";
+'use client';
 
-import { GoalDraftActions } from "@/modules/goal/components/GoalDraftActions";
-import { GoalDraftCard } from "@/modules/goal/components/GoalDraftCard";
-import { GoalFormedCard } from "@/modules/goal/components/GoalFormedCard";
-import { GoalLoader } from "@/modules/goal/components/GoalLoader";
-import { BuildGoalLayout } from "@/modules/goal/layouts/BuildGoalLayout";
-import { GoalEntity } from "@/modules/goal/types/goal";
-import { HeroEntity } from "@/modules/hero/types";
-import { GoalKpisLoader } from "@/modules/kpi/components/GoalKpisLoader";
-import { KpiBuilder } from "@/modules/kpi/components/KpiBuilder";
-import { KpiItem } from "@/modules/kpi/components/KpiItem";
-import { GoalSkillsLoader } from "@/modules/skills/components/GoalSkillsLoader";
-import { SkillItem } from "@/modules/skills/components/SkillItem";
-import { H2 } from "@/ui/custom/H1";
-import { notReachable } from "@/utils/notReachable";
+import { useRouter } from 'next/navigation';
+
+import { AcceptGoalForm } from '@/modules/goal/components/AcceptGoalForm';
+import { GoalDraftActions } from '@/modules/goal/components/GoalDraftActions';
+import { GoalDraftCard } from '@/modules/goal/components/GoalDraftCard';
+import { GoalFormedCard } from '@/modules/goal/components/GoalFormedCard';
+import { GoalLoader } from '@/modules/goal/components/GoalLoader';
+import { BuildGoalLayout } from '@/modules/goal/layouts/BuildGoalLayout';
+import { GoalEntity } from '@/modules/goal/types/goal';
+import { HeroEntity } from '@/modules/hero/types';
+import { GoalKpisLoader } from '@/modules/kpi/components/GoalKpisLoader';
+import { KpiBuilder } from '@/modules/kpi/components/KpiBuilder';
+import { KpiItem } from '@/modules/kpi/components/KpiItem';
+import { GoalSkillsLoader } from '@/modules/skills/components/GoalSkillsLoader';
+import { SkillItem } from '@/modules/skills/components/SkillItem';
+import { H2 } from '@/ui/custom/H1';
+import { notReachable } from '@/utils/notReachable';
 
 type Props = {
   goalId: string;
@@ -38,12 +41,13 @@ const Page = ({
   hero: HeroEntity;
   reload: () => void;
 }) => {
+  const router = useRouter();
   switch (goal.status) {
     // TODO: show error block
-    case "active":
-      throw new Error("Goal is already active");
+    case 'active':
+      throw new Error('Goal is already active');
 
-    case "draft":
+    case 'draft':
       return (
         <BuildGoalLayout hero={hero}>
           <GoalDraftCard goal={goal} />
@@ -51,19 +55,20 @@ const Page = ({
             goal={goal}
             onMsg={(msg) => {
               switch (msg.type) {
-                case "onGoalUpdated":
+                case 'onGoalAccepted':
+                case 'onGoalUpdated':
                   reload();
                   break;
 
                 default:
-                  return notReachable(msg.type);
+                  return notReachable(msg);
               }
             }}
           />
         </BuildGoalLayout>
       );
 
-    case "formed":
+    case 'formed':
       return (
         <BuildGoalLayout hero={hero}>
           <GoalFormedCard goal={goal} />
@@ -71,7 +76,7 @@ const Page = ({
             goal={goal}
             onMsg={(msg) => {
               switch (msg.type) {
-                case "onGoalAccepted":
+                case 'onGoalAccepted':
                   reload();
                   break;
 
@@ -83,10 +88,15 @@ const Page = ({
         </BuildGoalLayout>
       );
 
-    case "review":
+    case 'review':
       return (
         <BuildGoalLayout hero={hero}>
           <GoalFormedCard goal={goal} />
+          <AcceptGoalForm
+            goal={goal}
+            onMsg={() => router.replace(`/heroes/${hero.id}`)}
+            disabled={false}
+          />
           <div className="flex flex-col gap-2">
             <H2>{`KPI's`}</H2>
             <GoalKpisLoader goalId={goal.id}>
