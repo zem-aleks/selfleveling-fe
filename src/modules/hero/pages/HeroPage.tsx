@@ -8,6 +8,8 @@ import { HeroGoalDraftsLoader } from '@/modules/goal/components/HeroGoalDraftsLo
 import { HeroGoalsLoader } from '@/modules/goal/components/HeroGoalsLoader';
 import { HeroAttributes } from '@/modules/hero/components/HeroAttributes';
 import { HeroLoader } from '@/modules/hero/components/HeroLoader';
+import { HeroQuestsLoader } from '@/modules/quests/components/HeroQuestsLoader';
+import { QuestsList } from '@/modules/quests/components/QuestsList';
 import { HeroSkillsLoader } from '@/modules/skills/components/HeroSkillsLoader';
 import { SkillsList } from '@/modules/skills/components/SkillsList';
 import { Button } from '@/ui/button';
@@ -40,6 +42,15 @@ export const HeroPage = ({ heroId }: Props) => {
           <hr className={'w-full'} />
 
           <HeroAttributes hero={hero} />
+
+          <hr className={'w-full'} />
+
+          <div className={'flex w-full flex-col items-start gap-4'}>
+            <H2>Quests</H2>
+            <HeroQuestsLoader heroId={heroId} status={'active'}>
+              {(quests) => <QuestsList quests={quests} />}
+            </HeroQuestsLoader>
+          </div>
 
           <hr className={'w-full'} />
 
