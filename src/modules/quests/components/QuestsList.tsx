@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
 
-import dayjs from 'dayjs';
+import Countdown from 'react-countdown';
 
 import { QuestEntity } from '@/modules/quests/types/entity';
+import { Button } from '@/ui/button';
 import { Card, CardHeader, CardTitle } from '@/ui/card';
 import { H2, H3 } from '@/ui/custom/H1';
 
@@ -34,14 +35,14 @@ export const QuestsList = ({ quests }: Props): ReactNode => {
                     {quest.description}
                   </H3>
                 </div>
-                <div
-                  className={
-                    'min-w-[124px] rounded-md border-2 border-blue-300 p-1 px-2'
-                  }
-                >
-                  <p className={'text-right text-sm'}>Deadline</p>
-                  <p className={'text-muted-foreground text-right font-medium'}>
-                    {dayjs(quest.deadline).format('D MMMM YYYY')}
+                <div className={'rounded-md border-2 border-blue-300 p-1 px-2'}>
+                  <p className={'text-right text-sm'}>Time Left</p>
+                  <p
+                    className={
+                      'text-muted-foreground w-[72px] overflow-hidden text-right font-medium text-ellipsis'
+                    }
+                  >
+                    <Countdown date={quest.deadline} daysInHours={true} />
                   </p>
                 </div>
               </CardTitle>
@@ -99,6 +100,14 @@ export const QuestsList = ({ quests }: Props): ReactNode => {
                   )}
                 </div>
               </div>
+
+              <hr className={'mb-2 w-full'} />
+
+              {quest.required && (
+                <Button disabled={true}>
+                  {`The Quest is required and can't be cancelled!`}
+                </Button>
+              )}
 
               {/*<div className={'flex flex-col gap-2'}>{quest.description}</div>*/}
             </CardHeader>

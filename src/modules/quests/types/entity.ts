@@ -12,6 +12,7 @@ export type QuestEntity = {
   deadline: Date;
   createdAt: Date;
   updatedAt: Date;
+  required: boolean;
 };
 
 export type QuestStatus = 'active' | 'completed' | 'failed';
