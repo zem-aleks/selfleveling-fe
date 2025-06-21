@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { getHeroes } from '@/modules/hero/api/getHeroes';
 import {
@@ -17,12 +18,13 @@ import { notReachable } from '@/utils/notReachable';
 import { useReloadableData } from '@/utils/useReloadableData';
 
 export const HeroesPage = () => {
+  const router = useRouter();
   const { state, reload } = useReloadableData(getHeroes, undefined);
 
   const onHeaderMsg = (msg: HeroesHeaderMsg) => {
     switch (msg.type) {
       case 'onHeroCreated':
-        reload();
+        router.push(`/heroes/${msg.hero.id}`);
         break;
 
       default:
