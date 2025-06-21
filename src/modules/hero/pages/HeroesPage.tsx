@@ -7,6 +7,7 @@ import {
   HeroesHeader,
   Msg as HeroesHeaderMsg,
 } from '@/modules/hero/components/HeroesHeader';
+import { HeroDeleteForm } from '@/modules/hero/pages/HeroDeleteForm';
 import { Avatar, AvatarFallback } from '@/ui/avatar';
 import { Button } from '@/ui/button';
 import { Card } from '@/ui/card';
@@ -55,7 +56,19 @@ export const HeroesPage = () => {
                     <p className="text-sm text-gray-500">{hero.language}</p>
                   </div>
                   <div className={'flex items-center gap-2'}>
-                    <Button className={'bg-red-500'}>Delete</Button>
+                    <HeroDeleteForm
+                      heroId={hero.id}
+                      onMsg={(msg) => {
+                        switch (msg.type) {
+                          case 'onHeroDeleted':
+                            reload();
+                            break;
+
+                          default:
+                            return notReachable(msg.type);
+                        }
+                      }}
+                    />
                     <Link href={`/heroes/${hero.id}`}>
                       <Button>Select</Button>
                     </Link>
