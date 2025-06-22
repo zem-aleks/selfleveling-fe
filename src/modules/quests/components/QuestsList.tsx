@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 import Countdown from 'react-countdown';
 
@@ -8,10 +9,11 @@ import { Card, CardHeader, CardTitle } from '@/ui/card';
 import { H2, H3 } from '@/ui/custom/H1';
 
 type Props = {
+  heroId: string;
   quests: QuestEntity[];
 };
 
-export const QuestsList = ({ quests }: Props): ReactNode => {
+export const QuestsList = ({ quests, heroId }: Props): ReactNode => {
   if (quests.length === 0) {
     return (
       <div className={'text-muted-foreground pb-2 text-sm'}>
@@ -107,6 +109,12 @@ export const QuestsList = ({ quests }: Props): ReactNode => {
                 <Button disabled={true}>
                   {`The Quest is required and can't be cancelled!`}
                 </Button>
+              )}
+
+              {quest.isInitial && (
+                <Link href={`/heroes/${heroId}/goal`}>
+                  <Button className={'w-full'}>{`Create Goal`}</Button>
+                </Link>
               )}
 
               {/*<div className={'flex flex-col gap-2'}>{quest.description}</div>*/}

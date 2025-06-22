@@ -58,7 +58,7 @@ export const HeroPage = ({ heroId }: Props) => {
           <div className={'flex w-full flex-col items-start gap-4'}>
             <H2>Quests</H2>
             <HeroQuestsLoader heroId={heroId} status={'active'}>
-              {(quests) => <QuestsList quests={quests} />}
+              {(quests) => <QuestsList quests={quests} heroId={heroId} />}
             </HeroQuestsLoader>
           </div>
 
