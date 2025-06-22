@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 import { Button } from '@/ui/button';
 import { H1 } from '@/ui/custom/H1';
 

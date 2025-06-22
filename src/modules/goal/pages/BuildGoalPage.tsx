@@ -9,7 +9,7 @@ import { GoalFormedCard } from '@/modules/goal/components/GoalFormedCard';
 import { GoalLoader } from '@/modules/goal/components/GoalLoader';
 import { BuildGoalLayout } from '@/modules/goal/layouts/BuildGoalLayout';
 import { GoalEntity } from '@/modules/goal/types/goal';
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 import { GoalKpisLoader } from '@/modules/kpi/components/GoalKpisLoader';
 import { KpiBuilder } from '@/modules/kpi/components/KpiBuilder';
 import { KpiItem } from '@/modules/kpi/components/KpiItem';

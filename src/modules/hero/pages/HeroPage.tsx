@@ -14,6 +14,7 @@ import { HeroSkillsLoader } from '@/modules/skills/components/HeroSkillsLoader';
 import { SkillsList } from '@/modules/skills/components/SkillsList';
 import { Button } from '@/ui/button';
 import { H1, H2 } from '@/ui/custom/H1';
+import { Progress } from '@/ui/progress';
 import { notReachable } from '@/utils/notReachable';
 
 type Props = {
@@ -26,14 +27,23 @@ export const HeroPage = ({ heroId }: Props) => {
       {(hero) => (
         <div className="flex flex-col items-center gap-4">
           <div
-            className={
-              'flex w-full flex-row items-center justify-between gap-4 py-2 pt-4'
-            }
+            className={'flex w-full flex-row justify-between gap-4 py-2 pt-4'}
           >
             <Link href={`/`}>
               <Button variant={'outline'}>Back</Button>
             </Link>
-            <H1>Hero {hero.name}</H1>
+            <div
+              className={
+                'flex w-full max-w-[240px] flex-col items-center gap-1'
+              }
+            >
+              <H1>Hero {hero.name}</H1>
+              <p className={'text-muted-foreground'}>
+                Level {hero.level} ({hero.experience} /{' '}
+                {hero.experienceToLevelUp} EXP)
+              </p>
+              <Progress value={hero.levelProgress} />
+            </div>
             <Link href={`/heroes/${heroId}/goal`}>
               <Button>Create Goal</Button>
             </Link>

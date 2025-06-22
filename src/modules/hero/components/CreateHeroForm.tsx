@@ -11,7 +11,7 @@ import {
   CreateHeroData,
   CreateHeroFormSchema,
 } from '@/modules/hero/api/createHero';
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 import { Button } from '@/ui/button';
 import {
   Form,

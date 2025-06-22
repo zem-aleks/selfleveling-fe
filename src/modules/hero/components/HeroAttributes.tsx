@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { ATTRIBUTES_MAP } from '@/modules/attributes/const/attributes';
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 import { H2 } from '@/ui/custom/H1';
 
 type Props = {

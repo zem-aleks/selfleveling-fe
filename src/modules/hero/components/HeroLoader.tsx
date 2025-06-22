@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { getHero } from '@/modules/hero/api/getHero';
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 import { Button } from '@/ui/button';
 import { Label } from '@/ui/label';
 import { notReachable } from '@/utils/notReachable';

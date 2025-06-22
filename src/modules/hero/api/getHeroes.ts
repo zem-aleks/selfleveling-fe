@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 
 import { api } from '@/modules/auth/api/api';
-import { HeroEntity } from '@/modules/hero/types';
+import { HeroEntity } from '@/modules/hero/types/entity';
 
 export const getHeroes = async (
   params: void,
